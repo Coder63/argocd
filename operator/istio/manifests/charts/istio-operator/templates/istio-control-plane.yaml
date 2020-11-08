@@ -9,7 +9,7 @@ spec:
     ingressGateways:
         k8s:
             serviceAnnotation:
-                cloud.google.com/load-balnacer-type: External
+                cloud.google.com/load-balancer-type: External
   addonComponents:
     prometheus:
       enabled: false
