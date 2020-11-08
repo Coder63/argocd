@@ -10,4 +10,5 @@ resources:
 - service_account.yaml
 - operator.yaml
 - service.yaml
+- profile-default.yaml
 ...
