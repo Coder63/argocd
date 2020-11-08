@@ -1,5 +1,5 @@
-hub: gcr.io/istio-testing
-tag: 1.9-alpha.993681affaddc68d05f0834dcd6382fa47071ee9
+hub: docker.io/istio/operator
+tag: 1.7.4
 
 operatorNamespace: istio-operator
 
