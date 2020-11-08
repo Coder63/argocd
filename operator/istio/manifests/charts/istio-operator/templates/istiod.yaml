@@ -1,0 +1,15 @@
+apiVersion: install.istio.io/v1alpha1
+kind: IstioOperator
+metadata:
+  name: istio-control-plane
+  namespace: istio-system
+spec:
+  profile: default
+  components:
+    ingressGateways:
+        k8s:
+            serviceAnnotation:
+                cloud.google.com/load-balnacer-type: External
+  addonComponents:
+    prometheus:
+      enabled: false
