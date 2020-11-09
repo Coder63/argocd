@@ -16,11 +16,15 @@ spec:
       enabled: true
   components:
     ingressGateways:
-    - name: dev-istio-ingressgateway
+    - enabled: true
+      name: dev-istio-ingressgateway
+      namespace: istio-system
       k8s:
         serviceAnnotations:
           cloud.google.com/load-balancer-type: External
-    - name: main-istio-ingressgateway
-    k8s:
-      serviceAnnotations:
-        cloud.google.com/load-balancer-type: External
+    - enabled: true 
+      name: main-istio-ingressgateway
+      namespace: istio-system
+      k8s:
+        serviceAnnotations:
+          cloud.google.com/load-balancer-type: External
