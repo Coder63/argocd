@@ -5,6 +5,15 @@ metadata:
   namespace: istio-system
 spec:
   profile: default
+  addonComponents:
+    grafana:
+      enabled: true
+    prometheus:
+      enabled: true
+    kiali:
+      enabled: true
+    zipkin:
+      enabled: true
   components:
     ingressGateways:
     - name: dev-istio-ingressgateway
