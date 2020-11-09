@@ -10,7 +10,7 @@ kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/st
 
 ## server yaml edit to expose to outside world 
 
-cloud.google.com/load-balancer-type: external
+cloud.google.com/load-balancer-type: External
 
 
 ## password 
