@@ -4,12 +4,4 @@ metadata:
   name: istio-control-plane
   namespace: istio-system
 spec:
-  profile: default
-  # components:
-  #  ingressGateways:
-  #      k8s:
-  #          serviceAnnotation:
-  #              cloud.google.com/load-balancer-type: External
-  addonComponents:
-    prometheus:
-      enabled: false
+  profile: minimal
