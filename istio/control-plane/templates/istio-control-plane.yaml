@@ -1,7 +1,12 @@
-apiVersion: install.istio.io/v1alpha1
 kind: IstioOperator
 metadata:
   name: istio-control-plane
   namespace: istio-system
 spec:
   profile: default
+  components:
+    ingressGateways:
+    - name: istio-ingressgateway
+      k8s:
+        serviceAnnotations:
+          cloud.google.com/load-balancer-type: Internal
