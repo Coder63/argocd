@@ -1,5 +1,5 @@
 hub: docker.io/istio/operator
-tag: 1.7.4
+tag: 1.7.0
 
 operatorNamespace: istio-operator
 
