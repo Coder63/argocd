@@ -7,7 +7,11 @@ spec:
   profile: default
   components:
     ingressGateways:
-    - name: istio-ingressgateway
+    - name: dev-istio-ingressgateway
       k8s:
         serviceAnnotations:
-          cloud.google.com/load-balancer-type: Internal
+          cloud.google.com/load-balancer-type: External
+    - name: main-istio-ingressgateway
+    k8s:
+      serviceAnnotations:
+        cloud.google.com/load-balancer-type: External
