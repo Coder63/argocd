@@ -4,16 +4,7 @@ metadata:
   name: istio-control-plane
   namespace: istio-system
 spec:
-  profile: default
-  addonComponents:
-    grafana:
-      enabled: true
-    prometheus:
-      enabled: true
-    kiali:
-      enabled: true
-    zipkin:
-      enabled: true
+  profile: minimal
   components:
     ingressGateways:
     - enabled: true
@@ -22,9 +13,12 @@ spec:
       k8s:
         serviceAnnotations:
           cloud.google.com/load-balancer-type: External
-    - enabled: true 
-      name: main-istio-ingressgateway
-      namespace: istio-system
-      k8s:
-        serviceAnnotations:
-          cloud.google.com/load-balancer-type: External
+  addonComponents:
+    grafana:
+      enabled: true
+    prometheus:
+      enabled: true
+    kiali:
+      enabled: true
+    zipkin:
+      enabled: true  
