@@ -21,4 +21,4 @@ spec:
     kiali:
       enabled: true
     zipkin:
-      enabled: true  
+      enabled: true
