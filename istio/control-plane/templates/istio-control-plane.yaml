@@ -28,3 +28,5 @@ spec:
       k8s:
         serviceAnnotations:
           cloud.google.com/load-balancer-type: External
+
+          kubectl get namespace "istio-system" -o json | tr -d "\n" | sed "s/\"finalizers\": \[[^]]\+\]/\"finalizers\": []/" | kubectl replace --raw /api/v1/namespaces/stucked-namespace/finalize -f -
