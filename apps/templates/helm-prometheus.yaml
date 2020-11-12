@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: helm-prometheus
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: monitoring
+    server: {{ .Values.spec.destination.server }}
+  project: default
+  source:
+    path: .
+    repoURL: https://github.com/prometheus-operator/kube-prometheus.git
+    targetRevision: {{ .Values.spec.source.targetRevision }}
