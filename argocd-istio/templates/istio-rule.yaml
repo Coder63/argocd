@@ -19,7 +19,7 @@ metadata:
             name: http
             protocol: HTTP
           hosts:
-            - "argocd.kube"
+            - "*"
     # Uncomment below to enable HTTPS
     #      tls:
     #        httpsRedirect: true
@@ -38,7 +38,7 @@ metadata:
       name: argocd-server
     spec:
       hosts:
-      - argocd.kube
+      - "*"
       gateways:
         - argocd-gateway
       http:
