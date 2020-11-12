@@ -34,21 +34,6 @@ kubectl -n argocd patch secret argocd-secret \
 Another option is to delete both the admin.password and admin.passwordMtime keys and restart argocd-server. This will set the password back to the pod name as per the getting started guide.
 
 
-apiVersion: networking.istio.io/v1alpha3
-kind: VirtualService
-metadata:
-  name: bookinfo
-spec:
-  hosts:
-  - "*"
-  gateways:
-  - bookinfo-gateway
-  http:
-  - match:
-    - uri:
-        exact: /productpage
-    route:
-    - destination:
-        host: productpage
-        port:
-          number: 9080
+
+# image: docker.io/istio/pilot:1.7.4      - Standalone install 
+# image: docker.io/istio/operator:1.7.4   - Operator
