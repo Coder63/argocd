@@ -1,21 +1,21 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: helm-certmanager
+  name: helm-istio-base
   annotations:
-    argocd.argoproj.io/sync-wave: "3"
+    argocd.argoproj.io/sync-wave: "0"
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    namespace: cert-manager
+    namespace: istio-system
     server: {{ .Values.spec.destination.server }}
   project: default
   source:
-    path: deploy/charts/cert-manager
-    repoURL: https://github.com/jetstack/cert-manager.git
-    targetRevision: {{ .Values.spec.source.targetRevision }}
+    path: manifests/charts/base
+    repoURL: https://github.com/istio/istio.git
+    targetRevision: 1.7.4
     syncPolicy:
       automated:
         prune: true

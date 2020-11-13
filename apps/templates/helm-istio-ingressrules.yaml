@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: helm-certmanager
+  name: ingressrules
   annotations:
     argocd.argoproj.io/sync-wave: "3"
   namespace: argocd
@@ -9,12 +9,12 @@ metadata:
   - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    namespace: cert-manager
+    namespace: default
     server: {{ .Values.spec.destination.server }}
   project: default
   source:
-    path: deploy/charts/cert-manager
-    repoURL: https://github.com/jetstack/cert-manager.git
+    path: istio-ingress-rules
+    repoURL: https://github.com/Coder63/argocd.git
     targetRevision: {{ .Values.spec.source.targetRevision }}
     syncPolicy:
       automated:
