@@ -2,8 +2,8 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: helm-certmanager
-  annotations:
-    argocd.argoproj.io/sync-wave: "3"
+  # annotations:
+  #   argocd.argoproj.io/sync-wave: "3"
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
@@ -15,8 +15,7 @@ spec:
   source:
     path: deploy/charts/cert-manager
     repoURL: https://github.com/jetstack/cert-manager.git
-    targetRevision: {{ .Values.spec.source.targetRevision }}
-    syncPolicy:
+    targetRevision: v1.0.4
       automated:
         prune: true
         selfHeal: true
