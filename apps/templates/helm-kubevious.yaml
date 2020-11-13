@@ -14,3 +14,9 @@ spec:
     repoURL: https://helm.kubevious.io
     targetRevision: 0.7.22
     chart: kubevious
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

@@ -1,22 +1,22 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: helm-prometheus
+  name: helm-certmanager
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    namespace: monitoring
+    namespace: cert-manager
     server: {{ .Values.spec.destination.server }}
   project: default
   source:
-    path: .
-    repoURL: https://github.com/prometheus-operator/kube-prometheus.git
+    path: deploy/charts/cert-manager
+    repoURL: https://github.com/jetstack/cert-manager.git
     targetRevision: {{ .Values.spec.source.targetRevision }}
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
+    syncPolicy:
+      automated:
+        prune: true
+        selfHeal: true
+      syncOptions:
+        - CreateNamespace=true
