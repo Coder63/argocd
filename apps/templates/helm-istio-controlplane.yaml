@@ -15,7 +15,7 @@ spec:
   source:
     path: istio/controlplane
     repoURL: https://github.com/Coder63/argocd.git
-    targetRevision: HEAD
+    targetRevision: {{ .Values.spec.source.targetRevision }}
     syncPolicy:
       automated:
         prune: true

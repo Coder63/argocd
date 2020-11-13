@@ -13,9 +13,9 @@ spec:
     server: {{ .Values.spec.destination.server }}
   project: default
   source:
-    path: istio/controlplane
+    path: istio/base
     repoURL: https://github.com/Coder63/argocd.git
-    targetRevision: HEAD
+    targetRevision: {{ .Values.spec.source.targetRevision }}
     syncPolicy:
       automated:
         prune: true
