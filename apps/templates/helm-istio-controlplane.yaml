@@ -15,7 +15,7 @@ spec:
   source:
     path: istio/controlplane
     repoURL: https://github.com/Coder63/argocd.git
-    targetRevision: 1.7.4
+    targetRevision: HEAD
     syncPolicy:
       automated:
         prune: true

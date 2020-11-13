@@ -13,9 +13,9 @@ spec:
     server: {{ .Values.spec.destination.server }}
   project: default
   source:
-    path: manifests/charts/istio-operator
-    repoURL: https://github.com/istio/istio.git
-    targetRevision: 1.7.4
+    path: istio/operator
+    repoURL: https://github.com/Coder63/argocd.git
+    targetRevision: HEAD
     syncPolicy:
       automated:
         prune: true
