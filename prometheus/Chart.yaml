@@ -1,3 +1,0 @@
-apiVersion: v1
-name: istio-argocd
-version: 1.0.0
