@@ -1,0 +1,46 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: grafanagateway
+spec:
+  selector:
+    istio: ingressgateway # use istio default ingress gateway
+  servers:
+  - port:
+      number: 443
+      name: https-grafana
+      protocol: HTTPS
+    tls:
+      mode: SIMPLE
+      credentialName: tls-credential
+    hosts:
+    - grafana.istio-example.com
+  - port:
+      number: 443
+      name: https-prometheus
+      protocol: HTTPS
+    tls:
+      mode: SIMPLE
+      credentialName: tls-credential
+    hosts:
+    - prometheus.istio-example.com
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    tls:
+      httpsRedirect: true
+    hosts:
+    - argocd.istio-example.com
+  - port:
+      number: 443
+      name: https
+      protocol: HTTPS
+    tls:
+      mode: PASSTHROUGH
+    hosts:
+    - argocd.istio-example.com
+    tls:
+      mode: SIMPLE
+      privateKey: /etc/istio/ingressgateway-certs/tls.key
+      serverCertificate: /etc/istio/ingressgateway-certs/tls.crt

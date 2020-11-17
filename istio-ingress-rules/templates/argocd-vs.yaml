@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+    name: argocd-vs
+spec:
+    hosts:
+    - argocd.istio-example.com
+    gateways:
+    - grafanagateway
+    tls:
+    - match:
+    - port: 443
+        sniHosts:
+        - argocd.istio-example.com
+    route:
+    - destination:
+        host: argocd-server.argocd.svc.cluster.local
+        port:
+            number: 443
