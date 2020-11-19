@@ -24,20 +24,20 @@ metadata:
   name: grafana-vs
 spec:
   hosts:
-    - grafana.staging.donut.com
+  - grafana.staging.donut.com
   gateways:
-    - donutgateway
+  - donutgateway
   http:
-    - match:
-      - uri:
+  - match:
+    - uri:
         prefix: /grafana/
-      - uri:
+    - uri:
         prefix: /grafana
-      rewrite:
-        uri: /
-      route:
-        - destination:
-            host: grafana.istio-system.svc.cluster.local
-            port:
-              number: 3000
+    rewrite:
+      uri: /
+    route:
+    - destination:
+         host: grafana.istio-system.svc.cluster.local
+         port:
+           number: 3000
             
