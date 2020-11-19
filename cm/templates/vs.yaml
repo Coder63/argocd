@@ -18,19 +18,26 @@ spec:
            port:
              number: 80
 ---             
-# apiVersion: networking.istio.io/v1alpha3
-# kind: VirtualService
-# metadata:
-#     name: kubevious-vs
-# spec:
-#     hosts:
-#     - kubevious.staging.donut.com
-#     gateways:
-#     - donutgateway
-#     tls:
-#     - route:
-#       - destination:
-#            host: kubevious.kubevious.svc.cluster.local
-#            port:
-#              number: 80
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: grafana-vs
+spec:
+  hosts:
+    - grafana.staging.donut.com
+  gateways:
+    - donutgateway
+  http:
+    - match:
+      - uri:
+        prefix: /grafana/
+      - uri:
+        prefix: /grafana
+      rewrite:
+        uri: /
+      route:
+        - destination:
+            host: grafana.istio-system.svc.cluster.local
+            port:
+              number: 3000
             
