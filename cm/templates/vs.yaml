@@ -4,7 +4,7 @@ metadata:
     name: argocd-vs
 spec:
     hosts:
-    - "*.staging.donut.com"
+    - "argocd.staging.donut.com"
     gateways:
     - donutgateway
     tls:
