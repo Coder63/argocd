@@ -4,24 +4,24 @@ metadata:
     name: donutgateway
 spec:
     selector:
-    istio: ingressgateway # use istio default ingress gateway
+      istio: ingressgateway # use istio default ingress gateway
     servers:
     - port:
         number: 80
         name: http
         protocol: HTTP
-    tls:
+      tls:
         httpsRedirect: true
-    hosts:
-    - "*.staging.donut.com"
-    - port:
-        number: 443
-        name: https
-        protocol: HTTPS
-    tls:
+      hosts:
+      - "*.staging.donut.com"
+      - port:
+          number: 443
+          name: https
+          protocol: HTTPS
+      tls:
         mode: PASSTHROUGH
-    hosts:
-    - "*.staging.donut.com"
-    tls:
+      hosts:
+      - "*.staging.donut.com"
+      tls:
         mode: SIMPLE
         credentialName: istio-ingress-tls
