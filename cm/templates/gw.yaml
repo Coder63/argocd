@@ -14,14 +14,12 @@ spec:
         httpsRedirect: true
       hosts:
       - "*.staging.donut.com"
-      - port:
-          number: 443
-          name: https
-          protocol: HTTPS
-      tls:
-        mode: PASSTHROUGH
-      hosts:
-      - "*.staging.donut.com"
+    - port:
+        number: 443
+        name: https
+        protocol: HTTPS
       tls:
         mode: SIMPLE
-        credentialName: istio-ingress-tls
+        credentialName: istio-ingress-tls # must be the same as secret
+      hosts:
+      - "*.staging.donut.com"

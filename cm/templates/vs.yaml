@@ -11,9 +11,10 @@ spec:
     - match:
       - port: 443
         sniHosts:
-        - argocd.istio-example.com
+        - argocd.staging.donut.com
       route:
       - destination:
            host: argocd-server.argocd.svc.cluster.local
            port:
              number: 443
+        
