@@ -10,8 +10,8 @@ spec:
         number: 80
         name: http
         protocol: HTTP
-    #   tls:
-    #     httpsRedirect: true
+      tls:
+        httpsRedirect: true
       hosts:
       - "*.staging.donut.com"
     - port:
