@@ -15,7 +15,7 @@ spec:
   source:
     path: .
     repoURL: https://github.com/prometheus-operator/kube-prometheus.git
-    targetRevision: {{ .Values.spec.source.targetRevision }}
+    targetRevision: release-0.10
   syncPolicy:
     automated:
       prune: true
