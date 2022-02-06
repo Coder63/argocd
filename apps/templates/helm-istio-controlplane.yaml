@@ -2,8 +2,8 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: helm-istio-controlplane
-  # annotations:
-  #   argocd.argoproj.io/sync-wave: "2"
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
@@ -16,9 +16,9 @@ spec:
     path: istio/controlplane
     repoURL: https://github.com/Coder63/argocd.git
     targetRevision: {{ .Values.spec.source.targetRevision }}
-    syncPolicy:
-      automated:
-        prune: true
-        selfHeal: true
-      syncOptions:
-        - CreateNamespace=true
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
