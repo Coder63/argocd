@@ -16,9 +16,9 @@ spec:
     path: istio/operator
     repoURL: https://github.com/Coder63/argocd.git
     targetRevision: HEAD
-    syncPolicy:
-      automated:
-        prune: true
-        selfHeal: true
-      syncOptions:
-        - CreateNamespace=true
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
