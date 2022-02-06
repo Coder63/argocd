@@ -7,22 +7,22 @@ spec:
   selector:
     istio: ext-ingressgateway
   servers:
-    - port:
+    - hosts:
+        - grafana.istio.com
+      port:
         number: 3000
         name: http
         protocol: HTTP
-      hosts:
-      - grafana.istio.com
-     tls:
+      tls:
        httpsRedirect: true
-   - port:
-       number: 443
-       name: https
-       protocol: HTTPS
-     hosts:
-     - grafana.istio.com
-     tls:
-       mode: PASSTHROUGH
+    - hosts:
+        - grafana.istio.com
+      port:
+        number: 443
+        name: https
+        protocol: HTTPS
+      tls:
+        mode: PASSTHROUGH
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService

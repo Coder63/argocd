@@ -7,22 +7,22 @@ spec:
   selector:
     istio: ext-ingressgateway
   servers:
-    - port:
+    - hosts:
+        - prom.istio.com
+      port:
         number: 9090
         name: http
         protocol: HTTP
-      hosts:
-      - prom.istio.com
-     tls:
+      tls:
        httpsRedirect: true
-   - port:
-       number: 443
-       name: https
-       protocol: HTTPS
-     hosts:
-      - prom.istio.com
-     tls:
-       mode: PASSTHROUGH
+    - hosts:
+        - prom.istio.com
+      port:
+        number: 443
+        name: https
+        protocol: HTTPS
+      tls:
+        mode: PASSTHROUGH
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService

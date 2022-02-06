@@ -7,22 +7,22 @@ spec:
   selector:
     istio: ext-ingressgateway
   servers:
-    - port:
+    - hosts:
+        - argocd.istio.com
+      port:
         number: 80
         name: http
         protocol: HTTP
-      hosts:
-      - argocd.istio.com
-     tls:
+      tls:
        httpsRedirect: true
-   - port:
-       number: 443
-       name: https
-       protocol: HTTPS
-     hosts:
-     - argocd.istio.com
-     tls:
-       mode: PASSTHROUGH
+    - hosts:
+        - argocd.istio.com
+      port:
+        number: 443
+        name: https
+        protocol: HTTPS
+      tls:
+        mode: PASSTHROUGH
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
