@@ -1,0 +1,101 @@
+apiVersion: install.istio.io/v1alpha1
+kind: IstioOperator
+metadata:
+  name: di-istio-controlplane
+spec:
+  profile: {{.Values.istioProfile}}
+  values:
+    global:
+      tracer:
+        zipkin:
+          address: jaeger-collector.jaeger.svc.cluster.local:9411
+  components:
+    ingressGateways:
+    - enabled: true
+      name: {{.Values.devIngress.name}}
+      namespace: {{.Values.ingressNamespace}}
+      k8s:
+        serviceAnnotations:
+          cloud.google.com/load-balancer-type: {{ .Values.devIngress.loadBalancerType }}
+        service:
+          type: LoadBalancer
+          loadBalancerIP: {{ .Values.devIngress.loadBalancerIP }}
+          ports:
+            - name: status-port
+              port: 15021
+              targetPort: 15021
+            - name: http2
+              port: 80
+              targetPort: 8080
+            - name: https
+              port: 443
+              targetPort: 8443
+            - name: tls
+              port: 15443
+              targetPort: 15443
+      label:
+        istio: dev-ingressgateway
+    - enabled: true
+      name: {{.Values.mainIngress.name}}
+      namespace: {{.Values.ingressNamespace}}
+      k8s:
+        serviceAnnotations:
+          cloud.google.com/load-balancer-type: {{ .Values.mainIngress.loadBalancerType }}
+        service:
+          type: LoadBalancer
+          loadBalancerIP: {{ .Values.mainIngress.loadBalancerIP }}
+          ports:
+            - name: https
+              port: 443
+              targetPort: 8443
+      label:
+        istio: main-ingressgateway
+    - enabled: true
+      name: {{.Values.extIngress.name}}
+      namespace: {{.Values.ingressNamespace}}
+      k8s:
+        serviceAnnotations:
+          cloud.google.com/load-balancer-type: {{ .Values.extIngress.loadBalancerType }}
+        service:
+          type: LoadBalancer
+          loadBalancerIP: {{ .Values.extIngress.loadBalancerIP }}
+          ports:
+            - name: https
+              port: 443
+              targetPort: 8443
+      label:
+        istio: ext-ingressgateway
+  meshConfig:
+    accessLogFile: /dev/stdout
+    accessLogEncoding: JSON
+    accessLogFormat: "[%START_TIME%] %REQ(:METHOD)% %REQ(X-ENVOY-ORIGINAL-PATH?:PATH)% %PROTOCOL% %RESPONSE_CODE% %RESPONSE_FLAGS% %BYTES_RECEIVED% %BYTES_SENT% %DURATION% %RESP(X-ENVOY-UPSTREAM-SERVICE-TIME)% %REQ(X-FORWARDED-FOR)% %REQ(X-FORWARDED-CLIENT-CERT)% %REQ(USER-AGENT)% %REQ(X-REQUEST-ID)% %REQ(:AUTHORITY)% %UPSTREAM_HOST%\n"
+    defaultConfig:
+      gatewayTopology:
+        forwardClientCertDetails: SANITIZE_SET
+      tracing:
+        custom_tags:
+          X-Rep-Directory-Sync-Tenant-Id:
+            header:
+              defaultValue: missing
+              name: X-Rep-Directory-Sync-Tenant-Id
+          X-Rep-Jwt-Payload-B64:
+            header:
+              defaultValue: missing
+              name: X-Rep-Jwt-Payload-B64
+          X-Rep-Logging-Service-Tenant-Id:
+            header:
+              defaultValue: missing
+              name: X-Rep-Logging-Service-Tenant-Id
+          X-Rep-Prisma-Access-Tenant-Id:
+            header:
+              defaultValue: missing
+              name: X-Rep-Prisma-Access-Tenant-Id
+          x-auth-jwt:
+            header:
+              defaultValue: missing
+              name: x-auth-jwt
+          x-rep-rbac:
+            header:
+              defaultValue: missing
+              name: x-rep-rbac
+        sampling: {{ .Values.samplingRatio }}

@@ -1,0 +1,15 @@
+ingressNamespace: istio-system
+devIngress:
+  name: backend-gateway
+  loadBalancerIP: null
+  loadBalancerType: "Internal"
+mainIngress:
+  name: main-gateway
+  loadBalancerIP: null
+  loadBalancerType: "Internal"
+extIngress:
+  name: ext-gateway
+  loadBalancerIP: null
+  loadBalancerType: "External"
+istioProfile: minimal
+samplingRatio: 1
