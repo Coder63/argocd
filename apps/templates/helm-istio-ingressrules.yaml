@@ -15,7 +15,7 @@ spec:
   source:
     path: istio-ingress-rules
     repoURL: https://github.com/Coder63/argocd.git
-    targetRevision: {{ .Values.spec.source.targetRevision }}
+    targetRevision: asm
   syncPolicy:
     automated:
       prune: true
