@@ -30,36 +30,6 @@ spec:
               targetPort: 15443
       label:
         istio: dev-ingressgateway
-    - enabled: true
-      name: {{.Values.mainIngress.name}}
-      namespace: {{.Values.ingressNamespace}}
-      k8s:
-        serviceAnnotations:
-          cloud.google.com/load-balancer-type: {{ .Values.mainIngress.loadBalancerType }}
-        service:
-          type: LoadBalancer
-          loadBalancerIP: {{ .Values.mainIngress.loadBalancerIP }}
-          ports:
-            - name: https
-              port: 443
-              targetPort: 8443
-      label:
-        istio: main-ingressgateway
-    - enabled: true
-      name: {{.Values.extIngress.name}}
-      namespace: {{.Values.ingressNamespace}}
-      k8s:
-        serviceAnnotations:
-          cloud.google.com/load-balancer-type: {{ .Values.extIngress.loadBalancerType }}
-        service:
-          type: LoadBalancer
-          loadBalancerIP: {{ .Values.extIngress.loadBalancerIP }}
-          ports:
-            - name: https
-              port: 443
-              targetPort: 8443
-      label:
-        istio: ext-ingressgateway
   meshConfig:
     accessLogFile: /dev/stdout
     accessLogEncoding: JSON

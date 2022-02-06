@@ -1,44 +1,44 @@
----
-apiVersion: networking.istio.io/v1alpha3
-kind: Gateway
-metadata:
-  name: grafana-gateway
-spec:
-  selector:
-    istio: ext-ingressgateway
-  servers:
-    - hosts:
-        - grafana.istio.com
-      port:
-        number: 3000
-        name: http
-        protocol: HTTP
-      tls:
-       httpsRedirect: true
-    - hosts:
-        - grafana.istio.com
-      port:
-        number: 443
-        name: https
-        protocol: HTTPS
-      tls:
-        mode: PASSTHROUGH
----
-apiVersion: networking.istio.io/v1alpha3
-kind: VirtualService
-metadata:
-  name: grafana-vs
-spec:
-  hosts:
-  - grafana.istio.com
-  gateways:
-  - grafana-gateway
-  http:
-  - match:
-    - uri:
-        exact: /
-    route:
-    - destination:
-        host: grafana.monitoring.svc.cluster.local
-        port:
-          number: 3000
+# ---
+# apiVersion: networking.istio.io/v1alpha3
+# kind: Gateway
+# metadata:
+#   name: grafana-gateway
+# spec:
+#   selector:
+#     istio: ext-ingressgateway
+#   servers:
+#     - hosts:
+#         - grafana.istio.com
+#       port:
+#         number: 3000
+#         name: http
+#         protocol: HTTP
+#       tls:
+#        httpsRedirect: true
+#     - hosts:
+#         - grafana.istio.com
+#       port:
+#         number: 443
+#         name: https
+#         protocol: HTTPS
+#       tls:
+#         mode: PASSTHROUGH
+# ---
+# apiVersion: networking.istio.io/v1alpha3
+# kind: VirtualService
+# metadata:
+#   name: grafana-vs
+# spec:
+#   hosts:
+#   - grafana.istio.com
+#   gateways:
+#   - grafana-gateway
+#   http:
+#   - match:
+#     - uri:
+#         exact: /
+#     route:
+#     - destination:
+#         host: grafana.monitoring.svc.cluster.local
+#         port:
+#           number: 3000

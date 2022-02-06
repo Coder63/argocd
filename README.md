@@ -13,7 +13,7 @@ kubectl get pods -n argocd -l app.kubernetes.io/name=argocd-server -o name | cut
 
 # To reset password you might remove 'admin.password' and 'admin.passwordMtime' keys from argocd-secret and restart api server pod. Password will be reset to pod name
 
-kubectl patch secret argocd-secret  -p '{"data": {"admin.password": null, "admin.passwordMtime": null}}'
+kubectl -n argocd patch secret argocd-secret  -p '{"data": {"admin.password": null, "admin.passwordMtime": null}}'
 
 kubectl -n argocd patch secret argocd-secret -p '{"stringData": { "admin.password": "$2a$10$YfSavKYddETNHY2giEmTjOdieYEc8poRnmqm51.j666oTnnyQlFjK","admin.passwordMtime": "'$(date +%FT%T%Z)'" }}'
 
@@ -35,5 +35,11 @@ Another option is to delete both the admin.password and admin.passwordMtime keys
 
 
 
-##### image: docker.io/istio/pilot:1.7.4      - Standalone install 
+##### image: docker.io/istio/pilot:1.7.4      - Standalone install
 ##### image: docker.io/istio/operator:1.7.4   - Operator
+
+
+
+openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 -nodes \
+  -keyout example.key -out example.crt -subj "/CN=*.istiotesting.com" \
+  -addext "subjectAltName=DNS:*.istiotesting.com"
