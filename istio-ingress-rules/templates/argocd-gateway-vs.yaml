@@ -12,7 +12,7 @@ spec:
         name: http
         protocol: HTTP
       hosts:
-        - argocd.istio.com
+      - argocd.istio.com
      tls:
        httpsRedirect: true
    - port:
@@ -20,7 +20,7 @@ spec:
        name: https
        protocol: HTTPS
      hosts:
-       - argocd.istio.com
+     - argocd.istio.com
      tls:
        mode: PASSTHROUGH
 ---
